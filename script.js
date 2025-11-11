@@ -224,3 +224,12 @@ function selectAiSearchEngines(source) {
     ai_searche_engines_element[i].checked = source.checked;
   }
 }
+
+function selectAiChat(source) {
+  ai_searche_engines_element =
+    document.getElementsByClassName("ai-search-engine");
+
+  for (var i = 0; i < ai_searche_engines_element.length; i++) {
+    ai_searche_engines_element[i].checked = source.checked;
+  }
+}
