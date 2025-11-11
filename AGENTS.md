@@ -1,22 +1,28 @@
-# AGENTS.md
+# AGENTS.md - MultiSearchX Development Guide
 
 ## Commands
 
-**Initial Setup:** No package installation required. Simply clone the repo and open `index.html` in a browser.
+**Initial Setup:** None required (vanilla HTML/CSS/JS)
 
-**Build:** N/A (static HTML/CSS/JS)
+**Build:** N/A (no build step)
 
 **Lint:** N/A (no linter configured)
 
-**Tests:** N/A (no test framework configured)
+**Tests:** N/A (no test suite)
 
-**Dev Server:** Open `index.html` directly in a browser, or use a simple HTTP server like `python -m http.server` or `npx serve .`
+**Dev Server:** Open `index.html` in a browser, or use any static server (e.g., `python -m http.server` or VS Code Live Server)
 
-## Tech Stack & Architecture
+## Tech Stack
 
-- **Stack:** Pure HTML, CSS, and vanilla JavaScript (no frameworks or dependencies)
-- **Architecture:** Single-page application with client-side search URL generation
-- **Structure:** Root-level files: `index.html` (UI), `script.js` (search logic), `styles.css` (styling)
+- Pure HTML5, CSS3, and vanilla JavaScript
+- No frameworks or build tools
+- Client-side only application
+
+## Architecture
+
+- `index.html`: Main UI with form controls and search engine checkboxes
+- `script.js`: Search logic, URL generation, and tab opening functionality
+- `styles.css`: Styling for form elements and layout
 
 ## Code Style & Conventions
 
