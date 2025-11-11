@@ -1,32 +1,26 @@
-# AGENTS.md - MultiSearchX Development Guide
+# AGENTS.md
 
 ## Commands
 
-**Initial Setup:** None required (vanilla HTML/CSS/JS)
+**Setup:** No setup required - static HTML/CSS/JS site
 
 **Build:** N/A (no build step)
 
 **Lint:** N/A (no linter configured)
 
-**Tests:** N/A (no test suite)
+**Tests:** N/A (no test framework configured)
 
-**Dev Server:** Open `index.html` in a browser, or use any static server (e.g., `python -m http.server` or VS Code Live Server)
+**Dev Server:** Open `index.html` in a browser, or use a local server like `python -m http.server` or `npx -y http-server`
 
-## Tech Stack
+## Tech Stack & Architecture
 
-- Pure HTML5, CSS3, and vanilla JavaScript
-- No frameworks or build tools
-- Client-side only application
+- **Frontend:** Vanilla HTML, CSS, JavaScript (no frameworks)
+- **Architecture:** Single-page application with client-side form handling
+- **Core functionality:** Multi-search engine query dispatcher that opens search URLs in new tabs
 
-## Architecture
+## Code Style
 
-- `index.html`: Main UI with form controls and search engine checkboxes
-- `script.js`: Search logic, URL generation, and tab opening functionality
-- `styles.css`: Styling for form elements and layout
-
-## Code Style & Conventions
-
-- Use camelCase for variables and functions (e.g., `searchTerms`, `getSearchUrl`)
-- Inline event handlers in HTML (`onclick` attributes)
-- No comments unless necessary for complex logic
-- Forms use `data-bst` and `data-ast` attributes for search engine URL templates
+- Standard HTML5 structure with semantic elements
+- CSS uses class-based styling with consistent spacing (8px/16px/24px increments)
+- JavaScript uses `var` declarations, camelCase naming, and function declarations
+- No module system - all code in single files loaded via `<script>` tags

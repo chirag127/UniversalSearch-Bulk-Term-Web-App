@@ -19,9 +19,28 @@ function getSearchTerm(k, prependText, searchTerms, appendText, i) {
   return searchTerm;
 }
 
-function search() {
-  // console.log("search");
+function updateSearchCounter() {
+  var delimiter = document.getElementById("delimiter").value;
+  var searchTerms = document.getElementById("search-terms").value.split(delimiter);
+  var searchEngines = document.querySelectorAll('input[name="search-engine"]:checked');
+  var numberOfSearches = parseInt(document.getElementById("number-of-searches").value) || 0;
+  var numCustomSearchEngines = parseInt(document.getElementById("num-custom-search-engines").value) || 0;
+  
+  var validSearchTerms = 0;
+  for (var i = 0; i < searchTerms.length; i++) {
+    if (searchTerms[i].trim().length > 0) {
+      validSearchTerms++;
+    }
+  }
+  
+  var totalEngines = searchEngines.length + numCustomSearchEngines;
+  var searchesPerEngine = numberOfSearches + 1;
+  var totalSearches = validSearchTerms * totalEngines * searchesPerEngine;
+  
+  document.getElementById("counter-value").textContent = totalSearches;
+}
 
+function search() {
   var delimiter = document.getElementById("delimiter").value;
 
   console.log("delimiter: " + delimiter);
@@ -35,13 +54,9 @@ function search() {
     'input[name="search-engine"]:checked'
   );
 
-  // console.log(searchEngines);
-
   var customSearchEngines = document.querySelectorAll(
     ".custom-search-engine-field"
   );
-
-  // console.log(customSearchEngines);
 
   var delay = parseInt(document.getElementById("delay").value);
   var numberOfSearches = parseInt(
@@ -64,10 +79,6 @@ function search() {
           var ast = "";
         }
 
-        // console.log(bst);
-
-        // console.log(ast);
-
         for (var k = 0; k <= numberOfSearches; k++) {
           searchTerm = getSearchTerm(
             k,
@@ -78,8 +89,6 @@ function search() {
           );
 
           searchUrl = getSearchUrl(bst, ast, searchTerm, j);
-
-          // console.log(searchUrl);
 
           if (searchUrl == null) {
             continue;
@@ -96,6 +105,7 @@ function search() {
     }
   }
 }
+
 function generateCustomSearchEngineFields() {
   var count = parseInt(
     document.getElementById("num-custom-search-engines").value
@@ -106,6 +116,8 @@ function generateCustomSearchEngineFields() {
   for (var i = 1; i <= count; i++) {
     generateCustomSearchEngineField(customSearchEnginesDiv, i);
   }
+  
+  updateSearchCounter();
 }
 
 function generateCustomSearchEngineField(customSearchEnginesDiv, i) {
@@ -141,14 +153,8 @@ function toggle(source) {
   }
 
   document.getElementById("number-of-searches").value = 0;
+  updateSearchCounter();
 }
-
-/*
-    make a function that select the bing and disable google and  search a random term 20 times if the search terms box is empty else if the
-    search terms box is not empty then search the terms in the search terms box 20 times collectively
-    like if the search terms box has 3 terms then search all the terms 20/3 times
-
-    */
 
 function selectBing() {
   if (document.getElementById("bing").checked) {
@@ -169,8 +175,6 @@ function selectBing() {
     }
 
     if (search_terms_box.value.length == 0) {
-      // does js have a random number generator ?
-
       var r = Math.random().toString(36).substring(7);
 
       search_terms_box.value = r + " random ";
@@ -186,6 +190,8 @@ function selectBing() {
       search();
     }, 1000);
   }
+  
+  updateSearchCounter();
 }
 
 customSearchEnginesToSuggest = [
@@ -223,6 +229,7 @@ customSearchEnginesToSuggest = [
 
 function setDelimiter() {
   document.getElementById("delimiter").value = "-----";
+  updateSearchCounter();
 }
 
 function selectAiSearchEngines(source) {
@@ -232,6 +239,31 @@ function selectAiSearchEngines(source) {
   for (var i = 0; i < ai_searche_engines_element.length; i++) {
     ai_searche_engines_element[i].checked = source.checked;
   }
+  
+  updateSearchCounter();
+}
+
+function toggleCollapsible(sectionId) {
+  var section = document.getElementById(sectionId);
+  var button = section.previousElementSibling;
+  
+  button.classList.toggle("active");
+  section.classList.toggle("active");
+}
+
+window.onload = function() {
+  var searchTermsInput = document.getElementById("search-terms");
+  var numberOfSearchesInput = document.getElementById("number-of-searches");
+  var checkboxes = document.getElementsByName("search-engine");
+  
+  searchTermsInput.addEventListener("input", updateSearchCounter);
+  numberOfSearchesInput.addEventListener("input", updateSearchCounter);
+  
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener("change", updateSearchCounter);
+  }
+  
+  updateSearchCounter();
 }
 
 function selectAiChat(source) {

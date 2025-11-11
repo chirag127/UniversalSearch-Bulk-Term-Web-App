@@ -13,12 +13,13 @@
 
   <body>
     <h1>Multi-Search Website</h1>
+    
+    <div id="search-counter" class="search-counter">
+      Total searches to be performed: <span id="counter-value">0</span>
+    </div>
+
     <form>
       <label for="search-terms">Enter your search terms:</label>
-      <!-- <textarea id="search-terms" rows="10"> </textarea> -->
-
-      <!-- // the above textarea have some space in the box , like it always have some spaces already types in the box , i want to remove that space -->
-
       <textarea id="search-terms" rows="10"></textarea>
 
       <label for="append-text"
@@ -37,348 +38,176 @@
 
       <label>Select search engines:</label><br />
 
-      <label for="Select All">Select All</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        value="Select All"
-        id="select-all"
-        onclick="toggle(this);"
-      /><br />
-      <label for="select-ai-search"> Select AI Search </label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        value="Select AI Search"
-        id="select-ai-search"
-        onclick="selectAiSearchEngines(this);"
-      /><br />
+      <div class="engine-selection-controls">
+        <label for="Select All">Select All</label>
+        <input
+          type="checkbox"
+          name="search-engine"
+          value="Select All"
+          id="select-all"
+          onclick="toggle(this);"
+        /><br />
+        <label for="select-ai-search"> Select AI Search </label>
+        <input
+          type="checkbox"
+          name="search-engine"
+          value="Select AI Search"
+          id="select-ai-search"
+          onclick="selectAiSearchEngines(this);"
+        /><br />
 
-      <label for="select-bing">Select Bing</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        value="Select Bing"
-        id="select-bing"
-        onclick="selectBing();"
-      /><br />
+        <label for="select-bing">Select Bing</label>
+        <input
+          type="checkbox"
+          name="search-engine"
+          value="Select Bing"
+          id="select-bing"
+          onclick="selectBing();"
+        /><br />
+      </div>
 
-      <h2>Standard Search Engines</h2>
+      <div class="engine-category">
+        <button type="button" class="collapsible" onclick="toggleCollapsible('general-engines')">
+          General Search Engines
+        </button>
+        <div id="general-engines" class="collapsible-content">
+          <label for="google">Google</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            id="google"
+            data-bst="https://www.google.com/search?q="
+            data-ast=""
+            checked
+          /><br />
+          <label for="google-lucky">Google I'm Feeling Lucky</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            id="google-lucky"
+            data-bst="https://www.google.com/search?q="
+            data-ast="&btnI=I%27m+Feeling+Lucky"
+          /><br />
+          <label for="duckduckgo">DuckDuckGo</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            id="duckduckgo"
+            data-bst="https://duckduckgo.com/?q="
+            data-ast=""
+          /><br />
+          <label for="duckduckgo-lucky">DuckDuckGo Lucky</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            id="duckduckgo-lucky"
+            data-bst="https://duckduckgo.com/?q="
+            data-ast=""
+          /><br />
+        </div>
+      </div>
 
-      <label for="google">Google</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="google"
-        data-bst="https://www.google.com/search?q="
-        data-ast=""
-        checked
-      /><br />
-      <label for="google">Google I'm Feeling Lucky</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="google-lucky"
-        data-bst="https://www.google.com/search?q="
-        data-ast="&btnI=I%27m+Feeling+Lucky"
-      /><br />
+      <div class="engine-category">
+        <button type="button" class="collapsible" onclick="toggleCollapsible('ai-engines')">
+          AI-Powered Search Engines
+        </button>
+        <div id="ai-engines" class="collapsible-content">
+          <label for="bing">Bing</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="bing"
+            data-bst="https://www.bing.com/search?q="
+            data-ast=""
+          /><br />
+          <label for="phind">Phind</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="phind"
+            data-bst="https://phind.com/search?q="
+            data-ast=""
+          /><br />
+          <label for="perplexity">Perplexity</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="perplexity"
+            data-bst="https://perplexity.ai/search?q="
+            data-ast=""
+          /><br />
+          <label for="neeva">Neeva AI</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="neeva"
+            data-bst="https://neeva.ai/search?q="
+            data-ast=""
+          /><br />
+          <label for="brave">Brave</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="brave"
+            data-bst="https://search.brave.com/search?q="
+            data-ast=""
+          /><br />
+          <label for="youchat">YouChat</label>
+          <input
+            type="checkbox"
+            name="search-engine"
+            class="ai-search-engine"
+            id="youchat"
+            data-bst="https://you.com/search?q="
+            data-ast="&fromSearchBar=true&tbm=youchat"
+          /><br />
+        </div>
+      </div>
 
-      <label for="bing">Bing</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="bing"
-        data-bst="https://www.bing.com/search?q="
-        data-ast=""
-      /><br />
+      <div class="engine-category">
+        <button type="button" class="collapsible" onclick="toggleCollapsible('custom-engines')">
+          Custom Search Engines
+        </button>
+        <div id="custom-engines" class="collapsible-content">
+          <label for="num-custom-search-engines"
+            >Number of custom search engines:</label
+          >
+          <input
+            type="number"
+            id="num-custom-search-engines"
+            value="0"
+            onchange="generateCustomSearchEngineFields()"
+          /><br />
+          <div id="custom-search-engines"></div>
+        </div>
+      </div>
 
-      <label for="duckduckgo">DuckDuckGo</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="duckduckgo"
-        data-bst="https://duckduckgo.com/?q="
-        data-ast=""
-      /><br />
-      <label for="duckduckgo-lucky">DuckDuckGo Lucky</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="duckduckgo-lucky"
-        data-bst="https://duckduckgo.com/?q=\"
-        data-ast=""
-      /><br />
+      <div class="options-section">
+        <label for="delay">Delay between searches (in milliseconds):</label>
+        <input type="number" id="delay" value="0" /><br />
+        <label for="number-of-searches">Number of searches (optional):</label>
+        <input type="number" id="number-of-searches" value="0" /><br />
 
-      <h3>Traditional Search</h3>
-      <label for="yandex">Yandex</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="yandex"
-        data-bst="https://www.yandex.com/search/?text="
-        data-ast=""
-      /><br />
-      <label for="baidu">Baidu</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="baidu"
-        data-bst="https://www.baidu.com/s?wd="
-        data-ast=""
-      /><br />
-      <label for="ecosia">Ecosia</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="ecosia"
-        data-bst="https://www.ecosia.org/search?q="
-        data-ast=""
-      /><br />
-      <label for="yahoo">Yahoo!</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="yahoo"
-        data-bst="https://search.yahoo.com/search?p="
-        data-ast=""
-      /><br />
-      <label for="aol">AOL</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="aol"
-        data-bst="https://www.aol.com/search/?q="
-        data-ast=""
-      /><br />
-      <label for="naver">Naver</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="naver"
-        data-bst="https://search.naver.com/search.naver?query="
-        data-ast=""
-      /><br />
-      <label for="startpage">Startpage</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="startpage"
-        data-bst="https://www.startpage.com/do/search?q="
-        data-ast=""
-      /><br />
-      <label for="ask">Ask.com</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="ask"
-        data-bst="https://www.ask.com/web?q="
-        data-ast=""
-      /><br />
-      <label for="qwant">Qwant</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="qwant"
-        data-bst="https://www.qwant.com/?q="
-        data-ast=""
-      /><br />
-      <label for="swisscows">Swisscows</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="swisscows"
-        data-bst="https://swisscows.com/web?query="
-        data-ast=""
-      /><br />
-      <label for="gibiru">Gibiru</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="gibiru"
-        data-bst="https://gibiru.com/results.html?q="
-        data-ast=""
-      /><br />
-      <label for="searchencrypt">Search Encrypt</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="searchencrypt"
-        data-bst="https://www.searchencrypt.com/search?q="
-        data-ast=""
-      /><br />
+        <label for="set-delimer">Set Delimiter as break character</label>
+        <input
+          type="checkbox"
+          name="set-delimer"
+          value="Set Delimiter as break character"
+          id="Set Delimiter as break character"
+          onclick="setDelimiter();"
+        /><br />
+      </div>
 
-      <h3>Video</h3>
-      <label for="youtube">YouTube</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="youtube"
-        data-bst="https://www.youtube.com/results?search_query="
-        data-ast=""
-      /><br />
-
-      <h3>Shopping</h3>
-      <label for="amazon">Amazon</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="amazon"
-        data-bst="https://www.amazon.com/s?k="
-        data-ast=""
-      /><br />
-
-      <h3>Reference</h3>
-      <label for="internetarchive">Internet Archive</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="internetarchive"
-        data-bst="https://archive.org/search.php?query="
-        data-ast=""
-      /><br />
-      <label for="wolframalpha">Wolfram|Alpha</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        id="wolframalpha"
-        data-bst="https://www.wolframalpha.com/input/?i="
-        data-ast=""
-      /><br />
-
-      <h2>AI Search Engines</h2>
-
-      <label for="chatgpt">ChatGPT</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="chatgpt"
-        data-bst="https://chat.openai.com/?q="
-        data-ast=""
-      /><br />
-      <label for="claude">Claude AI</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="claude"
-        data-bst="https://claude.ai/new?q="
-        data-ast=""
-      /><br />
-      <label for="gemini">Google Gemini</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="gemini"
-        data-bst="https://gemini.google.com/app?q="
-        data-ast=""
-      /><br />
-      <label for="copilot">Bing Chat/Copilot</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="copilot"
-        data-bst="https://copilot.microsoft.com/?q="
-        data-ast=""
-      /><br />
-      <label for="perplexity">Perplexity AI</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="perplexity"
-        data-bst="https://www.perplexity.ai/search?q="
-        data-ast=""
-      /><br />
-      <label for="phind">Phind</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="phind"
-        data-bst="https://www.phind.com/search?q="
-        data-ast=""
-      /><br />
-      <label for="you">You.com</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="you"
-        data-bst="https://you.com/search?q="
-        data-ast="&fromSearchBar=true&tbm=youchat"
-      /><br />
-      <label for="neeva">Neeva AI</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="neeva"
-        data-bst="https://neeva.com/search?q="
-        data-ast=""
-      /><br />
-      <label for="brave-leo">Brave Leo</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="brave-leo"
-        data-bst="https://search.brave.com/search?q="
-        data-ast="&source=ai"
-      /><br />
-      <label for="kagi">Kagi</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="kagi"
-        data-bst="https://kagi.com/search?q="
-        data-ast=""
-      /><br />
-      <label for="andi">Andi Search</label>
-      <input
-        type="checkbox"
-        name="search-engine"
-        class="ai-search-engine"
-        id="andi"
-        data-bst="https://andisearch.com/?q="
-        data-ast=""
-      /><br />
-
-      <label for="custom">Custom</label>
-      <label for="num-custom-search-engines"
-        >Number of custom search engines:</label
-      >
-      <input
-        type="number"
-        id="num-custom-search-engines"
-        value="0"
-        onchange="generateCustomSearchEngineFields()"
-      /><br />
-      <div id="custom-search-engines"></div>
-
-      <label for="delay">Delay between searches (in milliseconds):</label>
-      <input type="number" id="delay" value="0" /><br />
-      <label for="number-of-searches">Number of searches (optional):</label>
-      <input type="number" id="number-of-searches" value="0" /><br />
-
-      <label for="set-delimer">Set Delimiter as break character</label>
-      <input
-        type="checkbox"
-        name="set-delimer"
-        value="Set Delimiter as break character"
-        id="Set Delimiter as break character"
-        onclick="setDelimiter();"
-      /><br />
-
-      <button type="button" onclick="search()">Search</button>
-      <button type="button" onclick="stop()">Stop</button>
-      <!-- <button type="button" onclick="clearSearches()">Clear</button> -->
-
-      <!-- reset button -->
-      <button type="reset">Reset</button>
+      <div class="button-group">
+        <button type="button" onclick="search()">Search</button>
+        <button type="button" onclick="stop()">Stop</button>
+        <button type="reset">Reset</button>
+      </div>
     </form>
   </body>
 </html>

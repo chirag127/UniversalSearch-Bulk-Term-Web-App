@@ -1,57 +1,248 @@
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 16px;
+}
+
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+
 h1 {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 24px;
-  }
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #2c3e50;
+}
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
 
-  textarea,
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    /* margin-bottom: 16px; */
-    margin: auto;
-  }
+/* ===================================
+   FORM ELEMENTS
+   =================================== */
 
-  button {
-    display: block;
-    margin: 16px auto;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-  }
+form {
+  margin: auto;
+  width: 90%;
+  max-width: 800px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-  /* fix for bug in code */
-  button:hover {
-    background-color: #0069d9;
-    color: #fff;
-  }
+textarea,
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
 
-  .custom-search-engine-field {
-    width: 80%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 16px;
-    text-align: center;
-    margin: auto;
-  }
+textarea {
+  font-family: inherit;
+  resize: vertical;
+}
 
+input[type="checkbox"] {
+  margin-left: 8px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+/* ===================================
+   BUTTONS
+   =================================== */
+
+button {
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0069d9;
+}
+
+button[type="reset"] {
+  background-color: #6c757d;
+}
+
+button[type="reset"]:hover {
+  background-color: #5a6268;
+}
+
+.button-group {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 2px solid #e9ecef;
+}
+
+.button-group button {
+  margin: 8px;
+}
+
+/* ===================================
+   SEARCH COUNTER
+   =================================== */
+
+.search-counter {
+  text-align: center;
+  padding: 16px;
+  margin: 0 auto 24px;
+  max-width: 800px;
+  background-color: #e7f3ff;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #0056b3;
+}
+
+#counter-value {
+  font-size: 24px;
+  color: #007bff;
+}
+
+/* ===================================
+   COLLAPSIBLE SECTIONS
+   =================================== */
+
+.engine-category {
+  margin-bottom: 16px;
+}
+
+.collapsible {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0;
+}
+
+.collapsible:hover {
+  background-color: #0069d9;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 8px;
+}
+
+.collapsible.active:after {
+  content: "\2212";
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #f8f9fa;
+  border-left: 3px solid #007bff;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 0 0 4px 4px;
+}
+
+.collapsible-content.active {
+  padding: 16px;
+  max-height: 800px;
+}
+
+/* ===================================
+   ENGINE SELECTION
+   =================================== */
+
+.engine-selection-controls {
+  background-color: #fff3cd;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  border: 1px solid #ffc107;
+}
+
+.engine-selection-controls label {
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 8px;
+}
+
+/* ===================================
+   OPTIONS SECTION
+   =================================== */
+
+.options-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 2px solid #e9ecef;
+}
+
+/* ===================================
+   CUSTOM SEARCH ENGINES
+   =================================== */
+
+.custom-search-engine-field {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 768px) {
   form {
-    margin: auto;
-    width: 90%;
-    padding: 10px;
+    width: 95%;
+    padding: 16px;
   }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .button-group button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+  }
+}
