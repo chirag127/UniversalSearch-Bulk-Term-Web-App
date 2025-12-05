@@ -1,0 +1,59 @@
+name: CI
+
+# This workflow will do a clean install of dependencies, build, test, and deploy components.
+# Visit https://github.com/marketplace/actions/npm-install for more information.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ["20.x", "22.x"]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Lint with Biome
+      run: npm run lint -- --fix=false # Ensure no fixing in CI, only reporting
+
+    - name: Format with Biome
+      run: npm run format -- --check # Ensure no formatting in CI, only reporting
+
+    - name: Build Project
+      run: npm run build -- --emptyOutDir
+
+    - name: Run Unit Tests with Vitest
+      run: npm run test:unit
+
+    - name: Run E2E Tests with Playwright
+      run: npm run test:e2e
+
+    # - name: Upload Coverage Reports
+    #   uses: codecov/codecov-action@v4
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+    #     directory: ./coverage/
+
+    - name: Archive Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-output
+        path: dist/ # Assuming 'dist' is your build output directory
